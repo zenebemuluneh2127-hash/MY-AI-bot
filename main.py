@@ -68,7 +68,7 @@ async def ai_response_handler(message: types.Message):
     try:
         response = await asyncio.to_thread(
             client.models.generate_content,
-            model="gemini-2.5-flash",  # እዚህ ላይ የሞዴል ስሙ ተስተካክሏል
+            model="gemini-3.5-flash",  # አዲሱ ትክክለኛው የሞዴል ስም ተስተካክሏል
             contents=message.text
         )
         text = response.text
@@ -79,7 +79,7 @@ async def ai_response_handler(message: types.Message):
             
     except Exception as e:
         logging.error(f"Error generating AI response: {e}")
-        await message.answer("⚠️️ <b>ይቅርታ!</b> መልሱን በማዘጋጀት ላይ ስህተት ተፈጥሯል። እባክዎ ትንሽ ቆይተው እንደገና ይሞክሩ።")
+        await message.answer("⚠️ <b>ይቅርታ!</b> መልሱን በማዘጋጀት ላይ ስህተት ተፈጥሯል። እባክዎ ትንሽ ቆይተው እንደገና ይሞክሩ።")
     finally:
         typing_task.cancel()
 
