@@ -37,7 +37,7 @@ def get_main_keyboard():
 async def start_handler(message: types.Message):
     welcome_text = (
         f"👋 <b>ሰላም {message.from_user.first_name}!</b>\n\n"
-        "እኔ በ <b>Google Gemini 1.5 Flash AI</b> የተሰራሁ የእርስዎ ዘመናዊ ረዳት ነኝ።\n"
+        "እኔ በ <b>Google Gemini AI</b> የተሰራሁ የእርስዎ ዘመናዊ ረዳት ነኝ።\n"
         "ማንኛውንም ጥያቄ፣ ጽሁፍ፣ ወይም ሃሳብ መጻፍ ይችላሉ!"
     )
     await message.answer(welcome_text, reply_markup=get_main_keyboard())
@@ -68,7 +68,7 @@ async def ai_response_handler(message: types.Message):
     try:
         response = await asyncio.to_thread(
             client.models.generate_content,
-            model="gemini-1.5-flash",
+            model="gemini-2.5-flash",  # እዚህ ላይ የሞዴል ስሙ ተስተካክሏል
             contents=message.text
         )
         text = response.text
@@ -79,7 +79,7 @@ async def ai_response_handler(message: types.Message):
             
     except Exception as e:
         logging.error(f"Error generating AI response: {e}")
-        await message.answer("⚠️ <b>ይቅርታ!</b> መልሱን በማዘጋጀት ላይ ስህተት ተፈጥሯል። እባክዎ ትንሽ ቆይተው እንደገና ይሞክሩ።")
+        await message.answer("⚠️️ <b>ይቅርታ!</b> መልሱን በማዘጋጀት ላይ ስህተት ተፈጥሯል። እባክዎ ትንሽ ቆይተው እንደገና ይሞክሩ።")
     finally:
         typing_task.cancel()
 
